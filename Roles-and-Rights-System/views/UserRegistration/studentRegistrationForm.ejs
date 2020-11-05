@@ -1,0 +1,86 @@
+<form name="studentForm" ng-if="data.UserTypeID == 2">
+
+    <div class="form-group">
+        <label>FirstName</label>
+        <input class="form-control" type="text" name="FirstName" ng-model="data.FirstName"
+               placeholder="First Name" ng-minlength="3" required>
+        <div ng-messages="studentForm.FirstName.$error" style="color:red"
+             ng-if="studentForm.FirstName.$touched"
+             role="alert">
+            <div ng-message="required">Please Enter First Name</div>
+            <div ng-message="minlength">First Name is too short</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>LastName</label>
+        <input class="form-control" type="text" name="LastName" ng-model="data.LastName"
+               placeholder="Last Name" ng-minlength="3" required>
+        <div ng-messages="studentForm.LastName.$error" style="color:red"
+             ng-if="studentForm.LastName.$touched"
+             role="alert">
+            <div ng-message="required">Please Enter Last Name</div>
+            <div ng-message="minlength">Last Name is too short</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Email Address</label>
+        <input class="form-control" type="email" name="EmailID" ng-model="data.EmailID"
+               placeholder="Email" required>
+        <div ng-messages="studentForm.EmailID.$error" style="color:red"
+             ng-if="studentForm.EmailID.$touched"
+             role="alert">
+            <div ng-message="required">Please Enter EmailID</div>
+            <div ng-message="email">Please Enter Valid EmailID</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Contact Number</label>
+        <input class="form-control" type="number" name="ContactNumber" ng-model="data.ContactNumber"
+               placeholder="Contact Number" ng-pattern="/^[6-9][0-9]{9}$/" required>
+        <div ng-messages="studentForm.ContactNumber.$error" style="color:red"
+             ng-if="studentForm.ContactNumber.$touched"
+             role="alert">
+            <div ng-message="required">Please Enter Contact Number</div>
+            <div ng-message="pattern">Please Enter Valid Contact Number</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Department</label>
+        <select class="form-control" ng-model="data.DepartmentID" name="DepartmentID" id="DepartmentID"
+                ng-options="dept.DepartmentID as dept.DepartmentName for dept in departments">
+            <option value="" disabled>---Select Department---</option>
+        </select>
+        <div ng-messages="studentForm.DepartmentID.$error" style="color:red"
+             ng-if="studentForm.DepartmentID.$touched"
+             role="alert">
+            <div ng-message="required">Please Select Department</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input class="form-control" type="password" name="Password" ng-model="data.Password"
+               placeholder="Password" ng-minlength="5" required>
+        <div ng-messages="studentForm.Password.$error" style="color:red"
+             ng-if="studentForm.Password.$touched"
+             role="alert">
+            <div ng-message="required">Please Enter Password</div>
+            <div ng-message="minlength">Password Must Be 5 Characters Long</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Confirm Password</label>
+        <input class="form-control" type="password" name="ConfirmPassword" placeholder="Confirm Password"
+               ng-model="data.ConfirmPassword" ng-pattern="data.Password" required>
+        <div ng-messages="studentForm.ConfirmPassword.$error" style="color:red"
+             ng-if="studentForm.ConfirmPassword.$touched"
+             role="alert">
+            <div ng-message="required">Please Re-Enter Password</div>
+            <div ng-message="pattern">Password Does Not Matches</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block" ng-disabled="!studentForm.$valid"
+                ng-click="registerUser()">Register
+        </button>
+    </div>
+</form>

@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"moodal_app._counters"}],"uuid":"97fb099961fa4ed3890c15b56e60f341"}

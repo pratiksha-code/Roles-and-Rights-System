@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../Partials/head.ejs %>
+</head>
+
+<body id="page-top" ng-app="createTestApp" ng-controller="createTestAppCtrlr" ng-init="initController()">
+<div id="wrapper">
+    <!-- Sidebar -->
+    <% include ../Partials/sidebar.ejs %>
+    <!--End Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <!-- TopBar -->
+            <% include ../Partials/navbar.ejs %>
+            <!-- Topbar -->
+            <!-- Container Fluid-->
+            <div class="container-fluid" id="container-wrapper">
+                <form name="testForm" class="bg-gradient-light p-4">
+                    <h4 class="text-primary text-center">Create Test</h4>
+                    <div class="col-12">
+                        <div class="alert alert-danger alert-dismissible" role="alert"
+                             ng-repeat="message in errorMessages">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            {{message}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label>Test Name</label>
+                            <input type="text" class="form-control" name="TestName" ng-model="test.TestName"
+                                   placeholder="Test Name" required>
+                            <div ng-messages="testForm.TestName.$error" style="color:red"
+                                 ng-if="testForm.TestName.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Enter Test Name</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label>Number Of Questions</label>
+                            <input type="number" class="form-control" name="NoOfQuestions" ng-model="test.NoOfQuestions"
+                                   placeholder="Number Of Questions" required>
+                            <div ng-messages="testForm.NoOfQuestions.$error" style="color:red"
+                                 ng-if="testForm.NoOfQuestions.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Enter No. Of Questions</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label>Department</label>
+                            <select class="form-control" ng-model="data.DepartmentID" name="DepartmentID"
+                                    id="DepartmentID"
+                                    ng-options="dept.DepartmentID as dept.DepartmentName for dept in departments">
+                                <option value="" disabled>---Select Department---</option>
+                            </select>
+                            <div ng-messages="testForm.DepartmentID.$error" style="color:red"
+                                 ng-if="testForm.DepartmentID.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Select Department</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col   text-center">
+                            <button class="btn btn-primary" ng-disabled="!testForm.$valid" ng-click="createTest()">
+                                Create Test
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!---End Of Container Fluid-->
+        <!-- Footer -->
+        <!-- Footer -->
+    </div>
+</div>
+<!-- Scroll to top -->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<% include ../Partials/bodyScriptLoader.ejs %>
+
+<script>
+    <% include ng-app.js %>
+</script>
+</body>
+
+</html>

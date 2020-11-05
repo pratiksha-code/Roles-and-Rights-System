@@ -1,0 +1,44 @@
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="js/ruang-admin.min.js"></script>
+
+<!--Alertify-->
+<script src="/vendor/alertify/alertify.js"></script>
+
+<!-- AngularJS Imported Here -->
+<script src="/vendor/angularjs/angular.min.js"></script>
+<script src="/vendor/angularjs/angular-messages.min.js"></script>
+<script src='/vendor/angularjs/angular-animate.min.js'></script>
+<script src='/vendor/angularjs/angular-route.min.js'></script>
+<script src='/vendor/angularjs/angular-aria.min.js'></script>
+<!--<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-messages.min.js'></script>-->
+<script src='/vendor/moment/moment.js'></script>
+<script src='/vendor/angularjs/angular-material.js'></script>
+<script src="/vendor/angularjs/angular-sanitize.js"></script>
+<script src="/vendor/angularjs/ui-bootstrap-tpls-2.1.3.js"></script>
+<script src="/vendor/angularjs/smart-table.min.js"></script>
+<!--<script src="/vendors/js/angularjs/smart-table-col-toggle.js"></script>-->
+<script src="/vendor/angular-material/angular-material.js"></script>
+<!--<script src="/vendor/angular-sanitize/angular-sanitize.js"></script>-->
+<script src="/vendor/angular-sanitize/angular-sanitize.min.js"></script>
+<!-- End AngularJS  Here -->
+
+<script src="/vendor/select2/select2.full.min.js"></script>
+
+<!--Page Link Active Class Selector-->
+<script>
+
+    jQuery(document).ready(function ($) {
+        var path = window.location.pathname;
+
+        if (path == '') {
+            path = '/';
+        }
+        console.log(path)
+        var target = $('.nav-item a[href="' + path + '"]');
+        console.log(target)
+        target.parent().addClass('active').addClass('is-shown');
+//        target.parent('li').parent().parent().addClass('open').addClass('hover').addClass('active')
+    })
+</script>

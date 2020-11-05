@@ -1,0 +1,152 @@
+<script type="text/ng-template" id="modal.html">
+    <div id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+        <div class="modal-header bg-info">
+            <h4 id="exampleModalLabel" ng-if="student.mode === 'add'" class="modal-title text-white">Add Student</h4>
+            <h4 id="exampleModalLabel" ng-if="student.mode === 'edit'" class="modal-title text-white">Edit Student</h4>
+            <button type="button" student-dismiss="modal" aria-label="Close" class="close text-light"
+                    ng-click="close()"><span
+                        aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body" ng-cloak>
+            <!--<div class="row">-->
+            <!--<div class="col">-->
+            <!--<div class="alert alert-danger fade in alert-dismissible show"-->
+            <!--ng-repeat="errorMessage in errorMessages">-->
+            <!--<button type="button" class="close" student-dismiss="alert" aria-label="Close">-->
+            <!--<span aria-hidden="true" style="font-size:20px">×</span>-->
+            <!--</button>-->
+            <!--<strong>Duplication Error!</strong> {{errorMessage}}-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <div class="px-3">
+                <form name="studentForm">
+                    <div class="col-12">
+                        <div class="alert alert-danger alert-dismissible" role="alert"
+                             ng-repeat="message in errorMessages">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            {{message}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label>FirstName</label>
+                            <input class="form-control" type="text" name="FirstName" ng-model="student.FirstName"
+                                   placeholder="First Name" ng-minlength="3" ng-change="userInputChanged(false, true)" ng-pattern="/^[a-zA-Z. ]*[a-zA-Z]$/"
+                                   required>
+                            <div ng-messages="studentForm.FirstName.$error" style="color:red"
+                                 ng-if="studentForm.FirstName.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Enter First Name</div>
+                                <div ng-message="minlength">First Name is too short</div>
+                                <div ng-message="pattern">student First Name is invalid</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-6">
+                            <label>LastName</label>
+                            <input class="form-control" type="text" name="LastName" ng-model="student.LastName"
+                                   placeholder="Last Name" ng-minlength="3" ng-change="userInputChanged(false, true)" ng-pattern="/^[a-zA-Z. ]*[a-zA-Z]$/"
+                                   required>
+                            <div ng-messages="studentForm.LastName.$error" style="color:red"
+                                 ng-if="studentForm.LastName.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Enter Last Name</div>
+                                <div ng-message="minlength">Last Name is too short</div>
+                                <div ng-message="pattern">student Last Name is invalid</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label>Email Address</label>
+                            <input class="form-control" type="email" name="EmailID" ng-model="student.EmailID"
+                                   placeholder="Email" ng-minlength="3"
+                                   ng-change="userInputChanged(true, false)" required>
+
+                            <div ng-messages="studentForm.EmailID.$error" style="color:red"
+                                 ng-if="studentForm.EmailID.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Enter EmailID</div>
+                                <div ng-message="email">Please Enter Valid EmailID</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-6">
+                            <label>Contact Number</label>
+                            <input class="form-control" type="text" name="ContactNumber"
+                                   ng-model="student.ContactNumber"
+                                   placeholder="Contact Number" ng-pattern="/^[6-9][0-9]{9}$/"
+                                   ng-minlength="3" ng-change="userInputChanged(true, false)" required>
+
+                            <div ng-messages="studentForm.ContactNumber.$error" style="color:red"
+                                 ng-if="studentForm.ContactNumber.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Enter Contact Number</div>
+                                <div ng-message="pattern">Please Enter Valid Contact Number</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label>Department</label>
+                            <select class="form-control" ng-model="student.DepartmentID" name="DepartmentID"
+                                    id="DepartmentID" ng-change="userInputChanged(false, true)"
+                                    ng-options="dept.DepartmentID as dept.DepartmentName for dept in departments">
+                                <option value="" disabled>---Select Department---</option>
+                            </select>
+                            <div ng-messages="studentForm.DepartmentID.$error" style="color:red"
+                                 ng-if="studentForm.DepartmentID.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Select Department</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label>Password</label>
+                            <input class="form-control" type="password" name="Password" ng-model="student.Password"
+                                   placeholder="Password" ng-minlength="5" ng-change="userInputChanged(true, false)"
+                                   required>
+                            <div ng-messages="studentForm.Password.$error" style="color:red"
+                                 ng-if="studentForm.Password.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Enter Password</div>
+                                <div ng-message="minlength">Password Must Be 5 Characters Long</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-6">
+                            <label>Confirm Password</label>
+                            <input class="form-control" type="password" name="ConfirmPassword"
+                                   placeholder="Confirm Password"
+                                   ng-model="student.ConfirmPassword" ng-change="userInputChanged(true, false)"
+                                   ng-pattern="student.Password" required>
+                            <div ng-messages="studentForm.ConfirmPassword.$error" style="color:red"
+                                 ng-if="studentForm.ConfirmPassword.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Re-Enter Password</div>
+                                <div ng-message="pattern">Password Does Not Matches</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-raised btn-primary" ng-if="student.mode=='add'"
+                ng-disabled="!studentForm.$valid || isPosting" ng-click="addNewStudent()">
+            <i class="fa fa-save"></i> Add student
+        </button>
+        <button type="button" class="btn btn-raised btn-warning" ng-if="student.mode=='edit'"
+                ng-disabled="!studentForm.$valid " ng-click="editStudent()">
+            <i class="fa fa-edit"></i> Edit Student
+        </button>
+        <button type="button" data-dismiss="modal" class="btn btn-raised btn-danger" ng-click="close()"><i
+                    class="fa fa-times"></i> Close
+        </button>
+    </div>
+</script>
+
+

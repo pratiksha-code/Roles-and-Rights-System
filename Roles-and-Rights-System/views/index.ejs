@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ./Partials/head.ejs %>
+</head>
+
+<body id="page-top">
+<div id="wrapper">
+    <!-- Sidebar -->
+    <% include ./Partials/sidebar.ejs %>
+    <!--End Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <!-- TopBar -->
+            <% include ./Partials/navbar.ejs %>
+            <!-- Topbar -->
+            <!-- Container Fluid-->
+            <div class="container-fluid" id="container-wrapper">
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">
+                        Page Title
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="./">Home</a></li>
+                        <li class="breadcrumb-item">Tables</li>
+                        <li class="breadcrumb-item active" aria-current="page">Simple Tables</li>
+                    </ol>
+                </div>
+
+                <!--Page Content Start Here-->
+                <div class="row">
+
+                </div>
+                <!--End Of Page Content-->
+            </div>
+            <!---End Of Container Fluid-->
+        </div>
+        <!-- Footer -->
+        <% include ./Partials/footer.ejs %>
+        <!-- Footer -->
+    </div>
+</div>
+<!-- Scroll to top -->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<% include ./Partials/bodyScriptLoader.ejs %>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<script type="text/ng-template" id="modal.html">
+    <div id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+        <div class="modal-header bg-info">
+            <h4 id="exampleModalLabel" ng-if="department.mode === 'add'" class="modal-title">Add Department</h4>
+            <h4 id="exampleModalLabel" ng-if="department.mode === 'edit'" class="modal-title">Edit Department</h4>
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close text-light"
+                    ng-click="close()"><span
+                        aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body" ng-cloak>
+            <!--<div class="row">-->
+                <!--<div class="col">-->
+                    <!--<div class="alert alert-danger fade in alert-dismissible show"-->
+                         <!--ng-repeat="errorMessage in errorMessages">-->
+                        <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+                            <!--<span aria-hidden="true" style="font-size:20px">×</span>-->
+                        <!--</button>-->
+                        <!--<strong>Duplication Error!</strong> {{errorMessage}}-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="px-3">
+                <form class="form form-horizontal ng-pristine ng-valid" name="form">
+                    <div class="form-body">
+                        <!-- <h4 class="form-section"><i class="ft-department"></i> Personal Info</h4> -->
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="label-control" for="DepartmentName">Department Name <span
+                                            class="required"
+                                            style="color:red">*</span>:
+                                </label>
+                                <input type="text" id="DepartmentName" class="form-control" name="DepartmentName"
+                                       ng-model="department.DepartmentName" ng-pattern="/^[a-zA-Z. ]*[a-zA-Z]$/"
+                                       placeholder="Enter Department Name" ng-minlength="2" required>
+                                <div ng-messages="form.DepartmentName.$error" style="color:red"
+                                     ng-if="form.DepartmentName.$touched"
+                                     role="alert">
+                                    <div ng-message="required">Please Enter Department Name</div>
+                                    <div ng-message="minlength">Department Name is too short</div>
+                                    <div ng-message="pattern">student Department Name is invalid</div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-raised btn-primary" ng-if="department.mode=='add'"
+                ng-disabled="!form.$valid || isPosting" ng-click="addNewDepartment()">
+            <i class="fa fa-save"></i> Add Department
+        </button>
+        <button type="button" class="btn btn-raised btn-warning" ng-if="department.mode=='edit'"
+                ng-disabled="!form.$valid " ng-click="updateDepartment()">
+            <i class="fa fa-edit"></i> Edit Department
+        </button>
+        <button type="button" data-dismiss="modal" class="btn btn-raised btn-danger" ng-click="close()"><i
+                    class="fa fa-times"></i> Close
+        </button>
+    </div>
+</script>
+
+

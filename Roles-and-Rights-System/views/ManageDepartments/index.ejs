@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../Partials/head.ejs %>
+</head>
+
+<body id="page-top" >
+<div id="wrapper" ng-app="manageDepartmentsApp" ng-controller="manageDepartmentsAppCtrlr" ng-init="initController()">
+    <!-- Sidebar -->
+    <% include ../Partials/sidebar.ejs %>
+    <!--End Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <!-- TopBar -->
+            <% include ../Partials/navbar.ejs %>
+            <!-- Topbar -->
+            <!-- Container Fluid-->
+            <div class="container-fluid" id="container-wrapper">
+
+                <div class="row mr-1">
+                    <div class="col text-right">
+                        <button type="button" class="btn btn-primary" ng-click="openModal('add')">
+                            Add Department
+                        </button>
+                    </div>
+                </div>
+                <br>
+                <div class="example ml-2">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-4 card  border-primary" style="border-radius: 16px;" ng-repeat="department in departments">
+                            <div class="well profile col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                                    <figure>
+                                        <img src="img/department.png" alt="Department" class="img-profile rounded-circle" style="width:50px;" id="user-img">
+                                    </figure>
+                                    <p style="text-align:center;font-size: smaller;overflow-wrap: break-word;" id="user-email">{{item}} </p>
+                                    <p style="text-align:center;font-size: smaller;"><strong>Sr. No. : </strong><span class="tags" id="user-status"><strong>{{$index+1}}</strong></span></p>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 divider text-center"></div>
+                                    <p style="text-align:center;font-size: smaller;"><strong>Department Name : {{department.DepartmentName}}</strong></p>
+                                    <p style="text-align:center;font-size: smaller;" id="user-role"></p>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 divider text-center"></div>
+                                    <button class="btn btn-xl" ng-click="openModal('edit', course)"
+                                            style="border: 0.5px solid;border-radius: 30px;"><i
+                                                class="fa fa-edit text-success" aria-hidden="true"></i></button>
+                                    <button class="btn btn-xl" ng-click="deleteCourse(course.CourseID)"
+                                            style="border: 0.5px solid;border-radius: 30px"><i
+                                                class="fa fa-trash text-danger" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!--Page Content Start Here-->
+                    <!--End Of Page Content-->
+                </div>
+
+                <!---End Of Container Fluid-->
+            </div>
+            <!--&lt;!&ndash; Footer &ndash;&gt;-->
+
+            <!--&lt;!&ndash; Footer &ndash;&gt;-->
+        </div>
+    </div>
+    <!-- Scroll to top -->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <% include ../Partials/bodyScriptLoader.ejs %>
+    <% include modal.ejs %>
+    <script>
+        <% include ng-app.js %>
+    </script>
+</div>
+</body>
+
+</html>

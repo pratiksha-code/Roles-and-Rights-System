@@ -1,0 +1,142 @@
+<script type="text/ng-template" id="modal.html">
+    <div id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+        <div class="modal-header bg-info">
+            <h4 id="exampleModalLabel" ng-if="teacher.mode === 'add'" class="modal-title text-white">Add teacher</h4>
+            <h4 id="exampleModalLabel" ng-if="teacher.mode === 'edit'" class="modal-title text-white">Edit teacher</h4>
+            <button type="button" student-dismiss="modal" aria-label="Close" class="close text-light"
+                    ng-click="close()"><span
+                        aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body" ng-cloak>
+            <div class="px-3">
+                <form name="teacherForm">
+
+                    <div class="col-12">
+                        <div class="alert alert-danger alert-dismissible" role="alert"
+                             ng-repeat="message in errorMessages">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            {{message}}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label>FirstName</label>
+                            <input class="form-control" type="text" name="FirstName" ng-model="teacher.FirstName"
+                                   placeholder="First Name" ng-minlength="3" ng-change="userInputChanged(false, true)" ng-pattern="/^[a-zA-Z. ]*[a-zA-Z]$/"
+                                   required>
+                            <div ng-messages="teacherForm.FirstName.$error" style="color:red"
+                                 ng-if="teacherForm.FirstName.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Enter First Name</div>
+                                <div ng-message="minlength">First Name is too short</div>
+                                <div ng-message="pattern">student First Name is invalid</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-6">
+                            <label>LastName</label>
+                            <input class="form-control" type="text" name="LastName" ng-model="teacher.LastName"
+                                   placeholder="Last Name" ng-minlength="3" ng-change="userInputChanged(false, true)" ng-pattern="/^[a-zA-Z. ]*[a-zA-Z]$/"
+                                   required>
+                            <div ng-messages="teacherForm.LastName.$error" style="color:red"
+                                 ng-if="teacherForm.LastName.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Enter Last Name</div>
+                                <div ng-message="minlength">Last Name is too short</div>
+                                <div ng-message="pattern">student Last Name is invalid</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label>Email Address</label>
+                            <input class="form-control" type="email" name="EmailID" ng-model="teacher.EmailID"
+                                   placeholder="Email" ng-minlength="3"
+                                   ng-change="userInputChanged(true, false)" required>
+                            <div ng-messages="teacherForm.EmailID.$error" style="color:red"
+                                 ng-if="teacherForm.EmailID.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Enter EmailID</div>
+                                <div ng-message="email">Please Enter Valid EmailID</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-6">
+                            <label>Contact Number</label>
+                            <input class="form-control" type="text" name="ContactNumber"
+                                   ng-model="teacher.ContactNumber"
+                                   placeholder="Contact Number" ng-pattern="/^[6-9][0-9]{9}$/"
+                                   ng-minlength="3" ng-change="userInputChanged(true, false)" required>
+
+                            <div ng-messages="teacherForm.ContactNumber.$error" style="color:red"
+                                 ng-if="teacherForm.ContactNumber.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Enter Contact Number</div>
+                                <div ng-message="pattern">Please Enter Valid Contact Number</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label>Department</label>
+                            <select class="form-control" ng-model="teacher.DepartmentID" name="DepartmentID"
+                                    id="DepartmentID" ng-change="userInputChanged(false, true)"
+                                    ng-options="dept.DepartmentID as dept.DepartmentName for dept in departments">
+                                <option value="" disabled>---Select Department---</option>
+                            </select>
+                            <div ng-messages="teacherForm.DepartmentID.$error" style="color:red"
+                                 ng-if="teacherForm.DepartmentID.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Select Department</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label>Password</label>
+                            <input class="form-control" type="password" name="Password" ng-model="teacher.Password"
+                                   placeholder="Password" ng-minlength="5" ng-change="userInputChanged(true, false)" required>
+                            <div ng-messages="teacherForm.Password.$error" style="color:red"
+                                 ng-if="teacherForm.Password.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Enter Password</div>
+                                <div ng-message="minlength">Password Must Be 5 Characters Long</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-6">
+                            <label>Confirm Password</label>
+                            <input class="form-control" type="password" name="ConfirmPassword"
+                                   placeholder="Confirm Password"
+                                   ng-model="teacher.ConfirmPassword" ng-change="userInputChanged(true, false)" ng-pattern="teacher.Password" required>
+                            <div ng-messages="teacherForm.ConfirmPassword.$error" style="color:red"
+                                 ng-if="teacherForm.ConfirmPassword.$touched"
+                                 role="alert">
+                                <div ng-message="required">Please Re-Enter Password</div>
+                                <div ng-message="pattern">Password Does Not Matches</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-raised btn-primary"
+                ng-disabled="!teacherForm.$valid || isPosting" ng-click="addNewTeacher()" ng-if="teacher.mode=='add'">
+            <i class="fa fa-save"></i> Add Teacher
+        </button>
+
+        <button type="button" class="btn btn-raised btn-warning" ng-if="teacher.mode=='edit'"
+                ng-disabled="!teacherForm.$valid " ng-click="editTeacher()">
+            <i class="fa fa-edit"></i> Edit Teacher
+        </button>
+
+        <button type="button" data-dismiss="modal" class="btn btn-raised btn-danger" ng-click="close()"><i
+                    class="fa fa-times"></i> Close
+        </button>
+    </div>
+</script>
+
+
